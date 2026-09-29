@@ -1,0 +1,14 @@
+{
+  "name": "jenkins-learning",
+  "version": "1.0.0",
+  "description": "Tiny app to learn Jenkins + Docker end-to-end",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

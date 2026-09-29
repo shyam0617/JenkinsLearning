@@ -1,0 +1,21 @@
+# ---- Runs Jenkins itself on your machine ----
+# Start:  cd jenkins && docker compose up -d --build
+# Stop:   docker compose down          (keeps data)
+# Wipe:   docker compose down -v        (deletes all Jenkins data)
+
+services:
+  jenkins:
+    build: .                    # builds our custom Jenkins+DockerCLI image
+    image: my-jenkins:lts
+    container_name: jenkins
+    restart: unless-stopped
+    user: root                  # learning setup: avoids docker.sock permission issues
+    ports:
+      - "8080:8080"             # Jenkins web UI -> http://localhost:8080
+      - "50000:50000"           # for extra build agents (not needed now)
+    volumes:
+      - jenkins_home:/var/jenkins_home        # persist jobs/config/plugins
+      - /var/run/docker.sock:/var/run/docker.sock  # let Jenkins use host Docker
+
+volumes:
+  jenkins_home:
